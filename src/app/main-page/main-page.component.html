@@ -1,0 +1,15 @@
+<div class="page">
+  <app-card titleText="Замовлення">
+    <div id="map" class="map"></div>
+    <app-active-order
+      *ngIf="!!activeOrder"
+      [activeOrder]="activeOrder"
+    ></app-active-order>
+    <app-custom-button
+      [isArrow]="true"
+      [isFullWidth]="true"
+      (onButtonClick)="!!activeOrder ? openMapPage() : openOrderPage()"
+      [buttonLabel]="!!activeOrder ? 'Відкрити мапу' : 'Взяти замовлення'"
+    ></app-custom-button>
+  </app-card>
+</div>

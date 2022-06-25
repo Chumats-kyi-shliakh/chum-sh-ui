@@ -1,0 +1,52 @@
+<div class="page">
+  <app-card titleText="На мапі">
+    <div id="map" class="map"></div>
+  </app-card>
+
+  <app-card titleText="Найближчі замовлення" [subtitle]="numberOfClosestOrders + ' поруч'">
+    <div class="product-group" *ngFor="let group of closestOrders">
+      <div class="product-group-name">{{ group.address }}</div>
+      <app-product-card
+        *ngFor="let product of group.products"
+        [product]="product"
+      ></app-product-card>
+    </div>
+  </app-card>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <span [ngStyle]="{color: '#737e94', fontSize: '14px'}">Загалом:</span>
+      <p class="total-values">
+        <span [ngStyle]="{fontFamily: 'e-Ukraine-Bold'}">{{ totalAmount }} шт</span>
+        <span [ngStyle]="{fontFamily: 'e-Ukraine-Bold'}">{{ totalSizes[0] }}x{{ totalSizes[1] }} см</span>
+        <span [ngStyle]="{fontFamily: 'e-Ukraine-Bold'}">{{ totalWeight }} кг</span>
+      </p>
+    </div>
+    <app-custom-button
+      [isArrow]="true"
+      [isFullWidth]="true"
+      (onButtonClick)="openConfirmationPage()"
+      [buttonLabel]="'Розрахувати маршрут'"
+    ></app-custom-button>
+  </footer>
+</div>
+
+<app-modal
+  *ngIf="productWasChoosenModal"
+  text="Вибачте, але обранний товар вже хтось забрав :("
+  [showPrimary]="true"
+  [showSecondary]="false"
+  primaryText="Ок"
+  (onPrimary)="productWasChoosenModal = !productWasChoosenModal"
+></app-modal>
+
+<app-modal
+  *ngIf="unsavedChangesModal"
+  text="Якщо ви покинете цю сторінку, то ваше вибране замовлення скасується. Ви точно хочете покинути сторінку?"
+  [showPrimary]="true"
+  [showSecondary]="true"
+  primaryText="Так"
+  secondaryText="Ні"
+  (onPrimary)="unsavedChangesModal = !unsavedChangesModal"
+  (onSecondary)="unsavedChangesModal = !unsavedChangesModal"
+></app-modal>

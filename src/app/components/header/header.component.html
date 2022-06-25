@@ -1,0 +1,10 @@
+<div class="header">
+  <img
+    *ngIf="isBackButton"
+    class="header-arrow-back"
+    src="assets/images/arrow-black.svg"
+    alt="Back"
+    (click)="goToMainPage()"
+  />
+  <h1 class="header-title">{{ titleText }}</h1>
+</div>

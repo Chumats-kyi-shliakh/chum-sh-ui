@@ -1,0 +1,78 @@
+<div class="product-card">
+  <div class="product-card-top">
+    <div class="product-card-avatar">
+      <img class="product-card-avatar-image" src="assets/images/avatar.png" alt="Avatar">
+    </div>
+    <div class="product-card-metadata">
+      <div class="product-card-name">{{ product.name }}</div>
+      <div class="product-card-values">
+        <div class="product-card-size">
+          {{ product.weight }} кг
+          <br>
+          {{ product.sizes && product.sizes[0] }}x{{ product.sizes && product.sizes[1] }}x{{ product.sizes && product.sizes[2] }} см
+        </div>
+        <div class="product-card-available">
+          В наявності
+          <br>
+          {{ product.available }} шт
+        </div>
+      </div>
+    </div>
+    <div
+      class="product-card-toggler"
+      (click)="isOpened = !isOpened"
+      [ngClass]="{'is-opened': isOpened}"
+    >
+      {{ isOpened ? '-' : '+' }}
+    </div>
+  </div>
+
+  <hr class="horizontal-line">
+
+  <div class="product-card-bottom">
+    <ng-container *ngIf="!isOpened">
+      <p [ngStyle]="{
+        color: '#737e94',
+        fontSize: '12px'
+      }">
+        Взяти замовлення зі складу:
+      </p>
+      <p [ngStyle]="{ fontSize: '12px' }">
+        {{ product.address }}
+      </p>
+    </ng-container>
+
+    <ng-container *ngIf="isOpened">
+      <div class="product-card-path">
+        <p [ngStyle]="{color: '#737e94'}">Скільки їхати?</p>
+        <div class="product-card-distance">
+          <p>
+            <span [ngStyle]="{fontFamily: 'e-Ukraine-Bold'}">{{ product.distanceFromYou }} км</span> від Вас
+          </p>
+          <p>
+            <span [ngStyle]="{fontFamily: 'e-Ukraine-Bold'}">{{ product.totalDistance }} км</span> загальної дороги
+          </p>
+        </div>
+      </div>
+      <br>
+      <p [ngStyle]="{
+        color: '#737e94',
+        fontSize: '12px'
+      }">
+        Скільки беремо? (Максимум {{ product.maximumAvailable }})
+      </p>
+      <div class="product-card-controls">
+        <app-number-control
+          [initialValue]="product.maximumAvailable"
+          (onValueChange)="changeAmountOfItems($event)"
+        ></app-number-control>
+        <app-custom-button
+          [isArrow]="false"
+          [isFullWidth]="false"
+          [buttonLabel]="'Додати'"
+          [isDisabled]="!product.maximumAvailable"
+        ></app-custom-button>
+      </div>
+    </ng-container>
+  </div>
+</div>

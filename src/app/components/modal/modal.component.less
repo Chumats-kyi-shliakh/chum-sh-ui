@@ -1,0 +1,42 @@
+.backdrop {
+  position: fixed;
+  width: 450px;
+  top: 0;
+  height: 800px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal {
+  background-color: #e2e7f0;
+  position: fixed;
+  padding: 15px;
+  font-family: 'e-Ukraine-Medium';
+  border-radius: 10px;
+  top: 225px;
+  right: 30%;
+  left: 30%;
+  height: 350px;
+  width: 400px;
+  left: calc(50% - 200px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.modal-button {
+  width: 100%;
+  background-color: white;
+  border: 1px solid black;
+  height: 40px;
+  outline: none;
+  border-radius: 20px;
+  font-size: 18px;
+  margin-bottom: 15px;
+  &.secondary {
+    background-color: transparent;
+  }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}

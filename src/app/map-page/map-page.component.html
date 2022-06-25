@@ -1,0 +1,64 @@
+<div class="page">
+  <div id="map" class="map"></div>
+
+  <div class="footer-content">
+    <span [ngStyle]="{color: '#737e94', fontSize: '14px'}">Наступна точка ({{ nextPoint.type === 'RECEIVE' ? 'отримання' : 'вигрузка' }})</span>
+    <div [ngStyle]="{margin: '8px 0'}">
+      <div [ngStyle]="{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px'}">
+        <span>{{ nextPoint.address }}</span>
+        <span [ngStyle]="{marginRight: '8px', fontSize: '18px'}" (click)="nextPoint.isOpened = !nextPoint.isOpened">{{ nextPoint.isOpened ? '-' : '+' }}</span>
+      </div>
+      <ng-container *ngIf="nextPoint.isOpened">
+        <div class="products-group-item" *ngFor="let product of nextPoint.products">
+          <div class="products-group-item-metadata">
+            <span>{{ product.name }} ({{ product.available }}шт)</span>
+            <span [ngStyle]="{fontFamily: 'e-Ukraine-Thin', marginTop: '5px'}">{{ product.weight }} кг, {{ product.sizes[0] }}x{{ product.sizes[1] }}x{{ product.sizes[2] }} см</span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <span [ngStyle]="{color: '#737e94', fontSize: '14px'}">Подальші точки</span>
+    <div [ngStyle]="{margin: '8px 0'}" *ngFor="let point of furtherPoints">
+      <div [ngStyle]="{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px'}">
+        <span>{{ point.address }}</span>
+        <span [ngStyle]="{marginRight: '8px', fontSize: '18px'}" (click)="point.isOpened = !point.isOpened">{{ point.isOpened ? '-' : '+' }}</span>
+      </div>
+      <ng-container *ngIf="point.isOpened">
+        <div class="products-group-item" *ngFor="let product of point.products">
+          <div class="products-group-item-metadata">
+            <span>{{ product.name }} ({{ product.available }}шт)</span>
+            <span [ngStyle]="{fontFamily: 'e-Ukraine-Thin', marginTop: '5px'}">{{ product.weight }} кг, {{ product.sizes[0] }}x{{ product.sizes[1] }}x{{ product.sizes[2] }} см</span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <app-custom-button
+      *ngIf="isCloseToDestination"
+      [isArrow]="true"
+      [isFullWidth]="true"
+      (onButtonClick)="nextPoint.isLastPoint ? this.openContinuePathModal() : this.openCompletePathModal()"
+      [buttonLabel]="'Підтвердити прибуття'"
+    ></app-custom-button>
+  </footer>
+</div>
+
+<app-modal
+  *ngIf="continuePathModal"
+  text="Вау, ти супер чел! Дуже дякуємо, що ти з нами є."
+  [showPrimary]="true"
+  [showSecondary]="false"
+  primaryText="Їдемо далі"
+  (onPrimary)="continuePathModal = !continuePathModal"
+></app-modal>
+
+<app-modal
+  *ngIf="completePathModal"
+  text="Вау, ти супер чел! Дуже дякуємо, що ти з нами є."
+  [showPrimary]="true"
+  [showSecondary]="false"
+  primaryText="Завершити поїздку"
+  (onPrimary)="completePathModal = !completePathModal"
+></app-modal>

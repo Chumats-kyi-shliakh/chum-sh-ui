@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  > * {
+    width: 60px;
+    text-align: center;
+  }
+}
+
+.control {
+  &.disabled {
+    color: #ccc;
+    pointer-events: none;
+  }
+}

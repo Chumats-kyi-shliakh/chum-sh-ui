@@ -1,0 +1,3 @@
+<div class="control" (click)="minus()" [ngClass]="{disabled: value === 0}">-</div>
+<div class="value">{{ value }}</div>
+<div class="control" (click)="plus()" [ngClass]="{disabled: value === _initialValue}">+</div>

@@ -1,0 +1,22 @@
+<div class="backdrop">
+  <div class="modal">
+    <div class="modal-text">{{ text }}</div>
+    <ng-content></ng-content>
+    <div class="modal-buttons">
+      <button
+        class="modal-button secondary"
+        *ngIf="showSecondary"
+        (click)="onSecondary.emit()"
+      >
+        {{ secondaryText }}
+      </button>
+      <button
+        class="modal-button"
+        *ngIf="showPrimary"
+        (click)="onPrimary.emit()"
+      >
+        {{ primaryText }}
+      </button>
+    </div>
+  </div>
+</div>

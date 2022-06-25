@@ -1,0 +1,18 @@
+<div class="active-order">
+  <div>{{ activeOrder.start }} - {{ activeOrder.end }}</div>
+  <div [ngStyle]="{ color: '#737e94' }">
+    {{ activeOrder.weight }} кг, {{ activeOrder.size[0] }}x{{ activeOrder.size[1] }} см.
+  </div>
+  <div class="active-order-route">
+    <div class="active-order-route-part" *ngFor="let point of activeOrder.points">
+      <div class="active-order-route-part-marker">
+        <div class="active-order-route-part-circle" [ngClass]="{'last': point.end}"></div>
+        <div class="active-order-route-part-line" *ngIf="!point.end"></div>
+      </div>
+      <div class="active-order-route-part-description">
+        <div>{{ point.city }}</div>
+        <div [ngStyle]="{ fontFamily: 'e-Ukraine-Thin' }">{{ point.address }}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<div class="page">
+  <div id="map" class="map"></div>
+  <app-card class="confirmation-card" titleText="Підтвердження" [subtitle]="numberOfProducts + ' товари'">
+    <span [ngStyle]="{color: '#737e94', fontSize: '12px'}">Загальна кількість:</span>
+    <div class="confirmation-values">
+      <p class="total-values">
+        <span [ngStyle]="{fontFamily: 'e-Ukraine-Bold'}">{{ totalAmount }} шт</span> товару
+        <br>
+        <span [ngStyle]="{fontFamily: 'e-Ukraine-Bold'}">{{ totalSizes[0] }}x{{ totalSizes[1] }}x{{ totalSizes[2] }} см</span> об'єму
+        <br>
+        <span [ngStyle]="{fontFamily: 'e-Ukraine-Bold'}">{{ totalWeight }} кг</span> ваги
+      </p>
+      <app-custom-button
+        class="add-more-button"
+        [isArrow]="false"
+        [isFullWidth]="false"
+        [buttonLabel]="'Додати ще'"
+        (onButtonClick)="openOrderPage()"
+      ></app-custom-button>
+    </div>
+    <hr class="horizontal-line">
+    <div class="path">
+      <span [ngStyle]="{color: '#737e94', fontSize: '12px'}">Шлях:</span>
+      <span [ngStyle]="{color: '#737e94', fontSize: '12px'}">{{ numberOfStops }} зупинки</span>  
+    </div>
+    <hr class="horizontal-line">
+    <div class="destination">
+      <span [ngStyle]="{fontFamily: 'e-Ukraine-Bold', fontSize: '14px'}">{{ finalAddress }}</span>
+      <span [ngStyle]="{fontFamily: 'e-Ukraine-Bold', fontSize: '30px'}">{{ kmLeft }} км</span>
+    </div>
+    <hr class="horizontal-line">
+    <p [ngStyle]="{color: '#263758', fontSize: '14px'}">Доставка по зупинках</p>
+    <div class="products-group" *ngFor="let group of addresses">
+      <span [ngStyle]="{color: '#737e94', fontSize: '12px'}">
+        {{ group.address }} ({{ group.type === 'RECEIVE' ? 'отримання' : 'вигрузка' }})
+      </span>
+      <div class="products-group-item" *ngFor="let product of group.products">
+        <div class="products-group-item-metadata">
+          <span>{{ product.name }} ({{ product.available }}шт)</span>
+          <span [ngStyle]="{fontFamily: 'e-Ukraine-Thin', marginTop: '5px'}">{{ product.weight }} кг, {{ product.sizes[0] }}x{{ product.sizes[1] }}x{{ product.sizes[2] }} см</span>
+        </div>
+        <div
+          class="products-group-item-remove"
+          (click)="openRemoveProductModal(product)"
+        >-</div>
+      </div>
+    </div>
+  </app-card>
+
+  <footer class="footer">
+    <app-custom-button
+      [isArrow]="true"
+      [isFullWidth]="true"
+      (onButtonClick)="openMapPage()"
+      [buttonLabel]="'Підтвердити'"
+    ></app-custom-button>
+  </footer>
+</div>
+
+<app-modal
+  *ngIf="removeProductModal"
+  text="Ви хочете видалити товар?"
+  [showPrimary]="true"
+  [showSecondary]="true"
+  primaryText="Так"
+  secondaryText="Ні"
+  (onPrimary)="removeProductModal = !removeProductModal"
+  (onSecondary)="removeProductModal = !removeProductModal"
+>
+  <span [ngStyle]="{color: '#737e94', fontSize: '12px'}">
+    Якщо ви видалите товар, відбудуться такі зміни:
+  </span>
+  <div class="tiles-container">
+    <div class="tile">
+      <span [ngStyle]="{color: '#737e94', fontSize: '12px'}">Кількість:</span>
+      <br>
+      <span [ngStyle]="{color: 'red', fontSize: '14px'}">-15 шт</span>
+      <br>
+      <span [ngStyle]="{fontSize: '14px'}">45 шт</span>
+    </div>
+    <div class="tile">
+      <span [ngStyle]="{color: '#737e94', fontSize: '12px'}">Вага:</span>
+      <br>
+      <span [ngStyle]="{color: 'red', fontSize: '14px'}">-213 кг</span>
+      <br>
+      <span [ngStyle]="{fontSize: '14px'}">158 кг</span>
+    </div>
+    <div class="tile">
+      <span [ngStyle]="{color: '#737e94', fontSize: '12px'}">Об'єм:</span>
+      <br>
+      <span [ngStyle]="{color: 'red', fontSize: '14px'}">-150x150x50 см</span>
+      <br>
+      <span [ngStyle]="{fontSize: '14px'}">150x150x50 см</span>
+    </div>
+    <div class="tile">
+      <span [ngStyle]="{color: '#737e94', fontSize: '12px'}">Маршрут:</span>
+      <br>
+      <span [ngStyle]="{color: 'red', fontSize: '14px'}">-20 км</span>
+      <br>
+      <span [ngStyle]="{fontSize: '14px'}">58.5 км</span>
+    </div>
+  </div>
+</app-modal>

@@ -1,0 +1,123 @@
+.page {
+  padding: 0;
+}
+
+.confirmation-card {
+  margin-bottom: 69px;
+  display: block;
+  ::ng-deep {
+    .card {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+
+.products-group {
+  margin-top: 12px;
+}
+
+.products-group-item {
+  margin-bottom: 8px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.products-group-item-metadata {
+  display: flex;
+  flex-direction: column;
+}
+
+.products-group-item-remove {
+  display: flex;
+  align-items: center;
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  justify-content: center;
+  border-radius: 50%;
+  margin-left: 20px;
+  background: white;
+  color: black;
+}
+
+.footer {
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  right: calc(50% - 200px);
+  left: calc(50% - 225px);
+  position: fixed;
+  bottom: calc(100% - 800px);
+  background-color: white;
+}
+
+.add-more-button ::ng-deep {
+  .button .button-label {
+    font-size: 12px;
+  }
+}
+
+.confirmation-values {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.total-values {
+  font-size: 12px;
+}
+
+.horizontal-line {
+  height: 1px;
+  background: #737e94;
+  opacity: 0.3;
+  margin: 12px 0;
+}
+
+.path {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.destination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.map {
+  margin: 10px 0 0;
+  height: 419px;
+}
+
+app-modal ::ng-deep {
+  .modal {
+    height: 400px;
+    top: 200px;
+  }
+}
+
+.tiles-container {
+  margin: 10px 0;
+}
+
+.tile {
+  background: #b4becf;
+  border-radius: 3px;
+  width: calc(50% - 12px);
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 6px;
+  padding: 5px;
+}

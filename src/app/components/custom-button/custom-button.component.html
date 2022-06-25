@@ -1,0 +1,17 @@
+<button
+  class="button"
+  [ngStyle]="{
+    'width': isFullWidth ? '100%' : 'auto',
+    'justify-content': isArrow ? 'space-between' : 'center'
+  }"
+  [ngClass]="{disabled: isDisabled}"
+  (click)="onButtonClick.emit()"
+>
+  <span class="button-label">{{ buttonLabel }}</span>
+  <img
+    *ngIf="isArrow"
+    class="button-arrow"
+    src="assets/images/arrow-white.svg"
+    alt="Go"
+  />
+</button>

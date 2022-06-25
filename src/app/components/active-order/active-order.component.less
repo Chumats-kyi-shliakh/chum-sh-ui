@@ -1,0 +1,47 @@
+.active-order {
+  background-color: transparent;
+  font-size: 12px;
+  margin: 10px 0;
+}
+
+.active-order-route {
+  margin: 5px 0;
+}
+
+.active-order-route-part {
+  display: flex;
+  margin-bottom: 5px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.active-order-route-part-marker {
+  width: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.active-order-route-part-circle {
+  width: 7px;
+  height: 7px;
+  background-color: #263758;
+  border-radius: 50%;
+  position: relative;
+  top: 6px;
+  &.last {
+    width: 10px;
+    height: 10px;
+    box-shadow: 0px 0px 0px 4px #ccc;
+    top: 4px;
+  }
+}
+
+.active-order-route-part-line {
+  width: 2px;
+  position: relative;
+  top: 12px;
+  height: calc(100% - 12px - 8px);
+  background-color: #737e94;
+}
