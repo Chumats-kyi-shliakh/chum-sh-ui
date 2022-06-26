@@ -23,6 +23,10 @@ export class OrderPageComponent {
   public totalWeight = 0;
 
   private map: any;
+  private cart: any = {
+    storage_ids: [],
+    order_ids: []
+  };
 
   constructor(private router: Router, private geolocationService: GeolocationService, private apiService: ApiService) {}
 
@@ -98,7 +102,20 @@ export class OrderPageComponent {
     // ];
   }
 
-  public openConfirmationPage(): void {
-    this.router.navigate([ROUTES.CONFIRMATION]);
+  public addToCart(event: any): void {
+    this.cart.storage_ids.push(event.product.storage_id);
+    this.cart.order_ids.push(event.product.order_id);
+  }
+
+  public calculateRoute(): void {
+    const payload = {
+      longitude: this.geolocationService.coords$.getValue().longitude,
+      latitude: this.geolocationService.coords$.getValue().latitude,
+      storage_ids: [...new Set(this.cart.storage_ids)],
+      order_ids: [...new Set(this.cart.order_ids)]
+    };
+    this.apiService.sendCurrentGeolocation(payload).subscribe(() => {
+      this.router.navigate([ROUTES.CONFIRMATION]);
+    });
   }
 }

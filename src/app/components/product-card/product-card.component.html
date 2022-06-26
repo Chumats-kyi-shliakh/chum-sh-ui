@@ -70,6 +70,7 @@
           [isArrow]="false"
           [isFullWidth]="false"
           [buttonLabel]="'Додати'"
+          (onButtonClick)="addToCart()"
           [isDisabled]="!product.maximumAvailable"
         ></app-custom-button>
       </div>

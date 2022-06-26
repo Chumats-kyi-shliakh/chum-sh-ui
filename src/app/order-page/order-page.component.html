@@ -9,6 +9,7 @@
       <app-product-card
         *ngFor="let product of group.products"
         [product]="product"
+        (onAddToCart)="addToCart($event)"
       ></app-product-card>
     </div>
   </app-card>
@@ -25,7 +26,7 @@
     <app-custom-button
       [isArrow]="true"
       [isFullWidth]="true"
-      (onButtonClick)="openConfirmationPage()"
+      (onButtonClick)="calculateRoute()"
       [buttonLabel]="'Розрахувати маршрут'"
     ></app-custom-button>
   </footer>
